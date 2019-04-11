@@ -14,6 +14,7 @@ from keras.layers import (
 )
 from keras.layers.convolutional import _Conv
 from keras.utils import conv_utils
+from keras.backend.common import normalize_data_format
 import numpy as np
 
 from .bn import ComplexBN as complex_normalization
@@ -219,7 +220,7 @@ class ComplexConv(Layer):
         self.strides = conv_utils.normalize_tuple(strides, rank, "strides")
         self.padding = conv_utils.normalize_padding(padding)
         self.data_format = "channels_last" \
-            if rank == 1 else conv_utils.normalize_data_format(data_format)
+            if rank == 1 else normalize_data_format(data_format)
         self.dilation_rate = conv_utils.normalize_tuple(
             dilation_rate, rank, "dilation_rate"
         )
